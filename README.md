@@ -1,10 +1,19 @@
 # tramp-virtualenv
 
-This is a collection of prototype code for making python.el work better in
-Emacs TRAMP buffers.
+This is a collection of prototype code and configuration for coding
+Python remotely using Emacs TRAMP buffers and python.el.
 
-1. python.el - a replacement for the python.el distributed with Emacs 24
-   that makes its python-send-region TRAMP-aware.
+## Assumptions
+
+Use Emacs version >= GNU Emacs 24.1.50.1 (x86_64-apple-darwin, NS
+apple-appkit-1038.36) of 2012-06-10 on bob.porkrind.org - Bazaar
+revision 108545.
+
+Michael Albinus changed python.el so that it creates temporary files on
+the remote server for python-send-region within a few days before
+2012-06-10.
+
+## Contents
 
 1. demo.py - an interactive demo.
 
@@ -16,5 +25,5 @@ Emacs TRAMP buffers.
 1. .dir.locals.el - configuration for Emacs to run python via the Bash
    script wrapper.
 
-1. tramp-dir-locals.el - a hack to make directory local variables work in
-   directories opened via TRAMP.
+1. tramp-dir-locals.el - configuration to make directory local variables
+   work in directories opened via TRAMP.
