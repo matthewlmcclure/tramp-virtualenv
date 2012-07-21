@@ -15,13 +15,13 @@ the remote server for python-send-region within a few days before
 
 ## Contents
 
-1. demo.py - an interactive demo.
+1. `tramp-virtualenv.el` - configuration to teach Emacs and TRAMP to
+   change to a virtualenv given in a remote `.dir-locals.el` file.
 
-1. bootstrap-virtualenv.sh - a Bash script to bootstrap a virtualenv for
-   use via Emacs over TRAMP.
+1. `example.dir.locals.el` - example directory local variable
+   configuration for Emacs to run python from a remote virtualenv.
 
-1. .dir.locals.el - configuration for Emacs to run python from a remote
-   virtualenv.
+1. `demo.py` - an interactive demo.
 
-1. tramp-dir-locals.el - configuration to make directory local variables
-   work in directories opened via TRAMP.
+1. `bootstrap-virtualenv.sh` - a Bash script to bootstrap a virtualenv
+   for use via Emacs over TRAMP.
