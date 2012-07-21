@@ -20,10 +20,8 @@ the remote server for python-send-region within a few days before
 1. bootstrap-virtualenv.sh - a Bash script to bootstrap a virtualenv for
    use via Emacs over TRAMP.
 
-1. python.sh - a Bash script to run python in a virtualenv.
-
-1. .dir.locals.el - configuration for Emacs to run python via the Bash
-   script wrapper.
+1. .dir.locals.el - configuration for Emacs to run python from a remote
+   virtualenv.
 
 1. tramp-dir-locals.el - configuration to make directory local variables
    work in directories opened via TRAMP.

@@ -1,2 +1,13 @@
 (if (boundp 'enable-remote-dir-locals)
     (setq enable-remote-dir-locals t))
+
+(defun tve-add-to-remote-path (dir)
+  (let* ((vec (tramp-dissect-file-name (buffer-file-name)))
+         (proc (tramp-get-connection-process vec))
+         (old-remote-path (tramp-get-remote-path vec))
+         (new-remote-path (add-to-list 'old-remote-path dir)))
+    (add-to-list 'tramp-remote-path dir)
+    (tramp-set-connection-property vec  "remote-path" new-remote-path)
+    (tramp-set-connection-property proc "remote-path" new-remote-path)
+    (tramp-set-remote-path vec)
+    ))
