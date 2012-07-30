@@ -2,5 +2,5 @@
 ;;; See Info node `(emacs) Directory Variables' for more information.
 
 ((nil
-  (eval . (tve-update-remote-path "~/.virtualenvs/tramp-virtualenv/bin"))
+  (eval . (tramp-virtualenv "~/.virtualenvs/tramp-virtualenv"))
   ))
