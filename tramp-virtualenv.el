@@ -39,6 +39,6 @@
   nil                                   ; keymap
   :group 'tramp-virtualenv)             ; group
 
-(add-hook 'post-command-hook 'tramp-virtualenv)
+(add-hook 'buffer-list-update-hook 'tramp-virtualenv)
 
 (provide 'tramp-virtualenv)
