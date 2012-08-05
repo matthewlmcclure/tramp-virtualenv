@@ -7,10 +7,10 @@
   (if (or dir (boundp 'tramp-virtualenv-bin-directory))
       (progn
         (and dir (set (make-local-variable 'tramp-virtualenv-bin-directory) (concat dir "/bin")))
+        (set (make-local-variable 'tramp-virtualenv-mode-line-string) (tramp-virtualenv-format-mode-line-string))
         (if (or (not (boundp 'tramp-virtualenv-last-bin-directory))
                 (not (equal tramp-virtualenv-bin-directory tramp-virtualenv-last-bin-directory)))
             (progn
-              (set (make-local-variable 'tramp-virtualenv-mode-line-string) (tramp-virtualenv-format-mode-line-string))
               (if (tramp-tramp-file-p (buffer-file-name))
                   (let* ((vec (tramp-dissect-file-name (buffer-file-name)))
                          (proc (tramp-get-connection-process vec))
