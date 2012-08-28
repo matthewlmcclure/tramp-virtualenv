@@ -3,12 +3,6 @@
 (if (boundp 'enable-remote-dir-locals)
     (setq enable-remote-dir-locals t))
 
-;; A workaround for http://debbugs.gnu.org/cgi/bugreport.cgi?bug=12145
-(defadvice find-name-dired
-  (around disable-remote-dir-locals-during-find-name-dired)
-  (let ((enable-remote-dir-locals nil))
-    ad-do-it))
-
 (defun tramp-virtualenv (&optional dir)
   (if (or dir (boundp 'tramp-virtualenv-bin-directory))
       (progn
