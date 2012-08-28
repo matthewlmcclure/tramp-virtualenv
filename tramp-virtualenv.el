@@ -12,10 +12,22 @@
 (defun tramp-virtualenv (&optional dir)
   (if (or dir (boundp 'tramp-virtualenv-bin-directory))
       (progn
-        (and dir (set (make-local-variable 'tramp-virtualenv-bin-directory) (concat dir "/bin")))
-        (set (make-local-variable 'tramp-virtualenv-mode-line-string) (tramp-virtualenv-format-mode-line-string))
-        (if (or (not (boundp 'tramp-virtualenv-last-bin-directory))
-                (not (equal tramp-virtualenv-bin-directory tramp-virtualenv-last-bin-directory)))
+        (if dir
+            (progn
+              (setenv "VIRTUAL_ENV" dir)
+              ;; TODO: Save tramp-virtualenv-directory instead of
+              ;; tramp-virtualenv-bin-directory. Compute the latter.
+
+              ;; TODO: Set VIRTUAL_ENV in
+              ;; tramp-remote-process-environment.
+              ;; (add-to-list 'tramp-remote-process-environment "VIRTUAL_ENV=/usr/local/python/env/prod_live")
+              (message dir)
+              (set (make-local-variable 'tramp-virtualenv-bin-directory) (concat dir "/bin"))
+              (set (make-local-variable 'tramp-virtualenv-mode-line-string) (tramp-virtualenv-format-mode-line-string))
+              (tramp-virtualenv-minor-mode t)))
+        (if (or 
+             (not (boundp 'tramp-virtualenv-last-bin-directory))
+             (not (equal tramp-virtualenv-bin-directory tramp-virtualenv-last-bin-directory)))
             (progn
               (if (tramp-tramp-file-p (buffer-file-name))
                   (let* ((vec (tramp-dissect-file-name (buffer-file-name)))
@@ -36,8 +48,7 @@
                   (setq exec-path (delete tramp-virtualenv-bin-directory exec-path))
                   (add-to-list 'exec-path tramp-virtualenv-bin-directory)
                   (setenv "PATH" (mapconcat 'identity exec-path ":"))))
-              (setq tramp-virtualenv-last-bin-directory tramp-virtualenv-bin-directory)
-              (tramp-virtualenv-minor-mode t))))
+              (setq tramp-virtualenv-last-bin-directory tramp-virtualenv-bin-directory))))
     (tramp-virtualenv-minor-mode -1)))
 
 (add-hook 'post-command-hook 'tramp-virtualenv)
