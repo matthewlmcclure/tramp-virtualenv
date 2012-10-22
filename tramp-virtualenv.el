@@ -1,5 +1,15 @@
 (require 'tramp)
 
+(defun load-ropemacs ()
+  "Load pymacs and ropemacs"
+  (interactive)
+  (require 'pymacs)
+  (pymacs-load "ropemacs" "rope-" t)
+  ;; Automatically save project python buffers before refactorings
+  (setq ropemacs-confirm-saving 'nil)
+  )
+(global-set-key "\C-xpl" 'load-ropemacs)
+
 (if (boundp 'enable-remote-dir-locals)
     (setq enable-remote-dir-locals t))
 
@@ -49,7 +59,8 @@
                       (add-to-list 'exec-path (tramp-virtualenv-bin-dir))
                       (setenv "PATH" (mapconcat 'identity exec-path ":"))))
                   (setq tramp-virtualenv-last-dir tramp-virtualenv-dir)
-                  (setq tramp-virtualenv-last-vec vec)))))
+                  (setq tramp-virtualenv-last-vec vec)
+                  (load-ropemacs)))))
       (tramp-virtualenv-minor-mode -1))))
 
 (add-hook 'post-command-hook 'tramp-virtualenv)
